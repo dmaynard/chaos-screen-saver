@@ -38,8 +38,8 @@ iteratePoint: function(x, y) {
 
 If you click the menu button you will see a benchmark speedometer. This measures how many pixels the attractor visits every millisecond, (averaged over the last second.) A pixel's darkness is increased everytime the attractor visits a it. An image is considered completed when 10% of it's visited points have reached total black, or when the image stops changing. The animation always runs at 60 frames per second. The attractor runs for 13 miliseconds of each animation frame, leaving 3 remaining milliseconds for coping the data out and rendering the page. This benchmark is single threaded. It measures JavaScript performance on one core.
 
-### Customize configuration
+### Dedication
 
-See [Configuration Reference](https://cli.vuejs.org/config/).
+This application is dedicated to the memory of my favorite Jovian, [Dave Needle](https://en.wikipedia.org/wiki/Dave_Needle), a gentle, joyful, Jovian, genius. RIP Dave.
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/d91842a9-dfd7-48eb-b6ff-c3d57032dfab/deploy-status)](https://app.netlify.com/sites/chaotic/deploys)
