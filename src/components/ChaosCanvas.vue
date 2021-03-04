@@ -58,6 +58,9 @@
           <button class="uiButton" v-on:click="doTestAttractor">
             Test
           </button>
+          <button class="uiButton" id="about" v-on:click="doAbout">
+            About
+          </button>
         </div>
       </div>
       <div v-else>
@@ -145,6 +148,8 @@ export default {
       framePerfs: new Array(2 ** logPerfArraySize),
       meanItersPerMillisonds: 0,
       countdownpct: 0,
+      aboutUrl:
+        "https://github.com/dmaynard/chaos-screen-saver/blob/master/README.md",
     };
   },
 
@@ -501,6 +506,11 @@ button.uiButton {
 }
 #shortprogressbar {
   display: block;
+}
+#about {
+  display: block;
+  height: 20px;
+  font-size: 12px;
 }
 button.close {
   display: block;
