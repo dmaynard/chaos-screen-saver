@@ -490,7 +490,12 @@ button.uiButton {
 }
 #itersperms {
   display: block;
+  background: rgba(255, 255, 255, 255);
   margin-bottom: 10px;
+}
+#Iterations {
+  display: block;
+  background: rgba(255, 255, 255, 255);
 }
 #lastprogressbar {
   display: block;
