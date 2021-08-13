@@ -22,7 +22,7 @@ export class AttractorObj {
     this.xmin = 100.0;
     this.ymax = -100.0;
     this.ymin = 100.0;
-    this.xRanfe = 1.0;
+    this.xRange = 1.0;
     this.yRange = 1.0;
 
     this.data = new Uint8ClampedArray(width * height * 4).map(() => 255); // RGBA
