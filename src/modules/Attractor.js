@@ -26,6 +26,9 @@ export class AttractorObj {
     this.yRange = 1.0;
 
     this.data = new Uint8ClampedArray(width * height * 4).map(() => 255); // RGBA
+    /* eslint-disable no-console */
+    console.log ( "New AttractorObg creates randomize is ", randomize);
+    /* eslint-enable no-console */
   }
   calculateFrame(budget, firstFrame) {
     let startTime = performance.now();
