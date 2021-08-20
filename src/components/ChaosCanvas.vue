@@ -106,7 +106,9 @@
 // Todo eliminate extraneous UI and functions
 import myprogressbar from "vue-simple-progress";
 import VueSpeedometer from "vue-speedometer";
-import { AttractorObj } from "../modules/Attractor";
+// import { AttractorObj } from "../modules/Attractor";
+//import { AttractorObj } from "../../../attractor_iterator/Attractor";
+import { AttractorObj } from "@davidsmaynard/attractor_iterator";
 const logPerfArraySize = 6; // 2**6 = 64 perfSamples
 export default {
   data() {
