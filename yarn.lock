@@ -903,10 +903,10 @@
     "@babel/helper-validator-identifier" "^7.14.0"
     to-fast-properties "^2.0.0"
 
-"@davidsmaynard/attractor_iterator@0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@davidsmaynard/attractor_iterator/-/attractor_iterator-0.1.0.tgz#e46d768530c7ff12eee952b8731188d144373e28"
-  integrity sha512-4y4jg73INC7zQwB6Ljwld0XGV6UUNVt6TRZfeZug6thdyQgWl+PGYRXEqzlxPapTAJTgJo7cQVwcfDm8EfnRlg==
+"@davidsmaynard/attractor_iterator@0.1.4":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@davidsmaynard/attractor_iterator/-/attractor_iterator-0.1.4.tgz#080d02488c25a7579e800dc0fc542cabc1a37b10"
+  integrity sha512-5HO2dN4tayNTtbDvbw8LAEdfFPT5sxt7TRUuVqOeCGnDNG7kZotBsf4hR1u0Zj9rOzLXNj0bjNG+UBZVRntCkQ==
 
 "@hapi/address@2.x.x":
   version "2.1.4"

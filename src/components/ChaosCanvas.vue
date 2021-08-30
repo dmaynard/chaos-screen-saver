@@ -1,4 +1,4 @@
-ª<template>
+<template>
   <div class="chaos-canvas-wrapper">
     <canvas
       id="mycanvas"
@@ -107,7 +107,8 @@
 import myprogressbar from "vue-simple-progress";
 import VueSpeedometer from "vue-speedometer";
 // import { AttractorObj } from "../modules/Attractor";
-//import { AttractorObj } from "../../../attractor_iterator/Attractor";
+// import { AttractorObj } from "../../../attractor_iterator/Attractor";
+// "@davidsmaynard/attractor_iterator": "0.1.0"
 import { AttractorObj } from "@davidsmaynard/attractor_iterator";
 const logPerfArraySize = 6; // 2**6 = 64 perfSamples
 export default {
@@ -387,6 +388,7 @@ export default {
     iterateAttractor(init, randomize, clearScreen) {
       // let nx = 0;
       // let ny = 0;
+      const initialIterations = 20000;
       let msElapsed = 1;
       let loopCount = 0;
 
@@ -409,7 +411,7 @@ export default {
         this.randomize = true;
       }
       let startTime = performance.now();
-      loopCount = this.att.calculateFrame(this.msFrameBudget, init);
+      loopCount = this.att.calculateFrame(this.msFrameBudget, init, initialIterations);
       msElapsed = performance.now() - startTime;
       this.framePerfs[this.frames & (2 ** logPerfArraySize - 1)] =
         loopCount / msElapsed;

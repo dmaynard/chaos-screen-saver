@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@davidsmaynard/attractor_iterator": "0.1.0",
+    "@davidsmaynard/attractor_iterator": "0.1.4",
     "@babel/runtime": "^7.13.8",
     "core-js": "^3.6.5",
     "serialize-javascript": "^4.0.0",
