@@ -107,7 +107,7 @@
 import myprogressbar from "vue-simple-progress";
 import VueSpeedometer from "vue-speedometer";
 // import { AttractorObj } from "../modules/Attractor";
-// import { AttractorObj } from "../../../attractor_iterator/Attractor";
+//import { AttractorObj } from "../../../attractor_iterator/Attractor";
 // "@davidsmaynard/attractor_iterator": "0.1.0"
 import { AttractorObj } from "@davidsmaynard/attractor_iterator";
 const logPerfArraySize = 6; // 2**6 = 64 perfSamples
@@ -127,6 +127,7 @@ export default {
       startNewAttractor: true,
       displayDelayDefault: 600,
       displayDelay: 0,
+      initialIterations: 20000,
 
       pbarcolor: "rgba(0,200,0,0.5)",
       tbarcolor: "rgba(240,180,0,0.5)",
@@ -388,7 +389,6 @@ export default {
     iterateAttractor(init, randomize, clearScreen) {
       // let nx = 0;
       // let ny = 0;
-      const initialIterations = 20000;
       let msElapsed = 1;
       let loopCount = 0;
 
@@ -411,7 +411,7 @@ export default {
         this.randomize = true;
       }
       let startTime = performance.now();
-      loopCount = this.att.calculateFrame(this.msFrameBudget, init, initialIterations);
+      loopCount = this.att.calculateFrame(this.msFrameBudget, init, this.initialIterations);
       msElapsed = performance.now() - startTime;
       this.framePerfs[this.frames & (2 ** logPerfArraySize - 1)] =
         loopCount / msElapsed;
@@ -456,6 +456,15 @@ export default {
       this.att.params = [...testParam];
       this.randomize = false;
       this.startNewAttractor = true;
+      this.att.iters = 0;
+      this.att.calculateFrame(this.msFrameBudget, true, this.initialIterations);
+      console.log(" x=", this.att.x);
+      console.log(" y=", this.att.y);
+      if (this.att.x === -0.5121308725194549 && this.att.y === 0.24957950317493394) {
+        console.log(" Test Passed");
+      } else {
+         console.log(" Test Failed");
+      }
       this.initImageData(window.innerWidth, window.innerHeight);
       this.animationRequestID = window.requestAnimationFrame(this.doAnimation);
     },
