@@ -14,11 +14,11 @@
     "serialize-javascript": "^4.0.0",
     "vue": "^2.6.12",
     "vue-simple-progress": "^1.1.1",
-    "vue-speedometer": "^1.8.0"
+    "vue-speedometer": "^1.8.0",
+    "@davidsmaynard/attractor_iterator": "^0.1.4"
   },
   "devDependencies": {
     "@babel/core": "^7.13.8",
-    "@davidsmaynard/attractor_iterator": "^0.1.5",
     "@babel/preset-env": "^7.13.8",
     "@vue/cli-plugin-babel": "^4.5.6",
     "@vue/cli-plugin-eslint": "^4.5.6",

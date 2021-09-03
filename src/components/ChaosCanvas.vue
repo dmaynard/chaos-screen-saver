@@ -55,7 +55,7 @@
           <label id="itersperms" align="center" for="Iterations"
             >Pixels per ms
           </label>
-          <button v-bind:class="{'uiButton': tested === 0, 'uiButtonError': tested===1, 'uiButtonPassed': tested ===2}"  v-on:click="doTestAttractor">
+          <button class="uiButton"  v-on:click="doTestAttractor">
             Test
           </button>
           <button class="uiButton" id="about" v-on:click="doAbout">
@@ -153,7 +153,6 @@ export default {
       countdownpct: 0,
       aboutUrl:
         "https://github.com/dmaynard/chaos-screen-saver/blob/master/README.md",
-      tested: 0,
     };
   },
 
@@ -459,15 +458,6 @@ export default {
       this.startNewAttractor = true;
       this.att.iters = 0;
       this.att.calculateFrame(this.msFrameBudget, true, this.initialIterations);
-      console.log(" x=", this.att.x);
-      console.log(" y=", this.att.y);
-      if (this.att.x === -0.5121308725194549 && this.att.y === 0.24957950317493394) {
-        console.log(" Test Passed");
-        this.tested = 2;
-      } else {
-         console.log(" Test Failed");
-         this.tested = 1;
-      }
       this.initImageData(window.innerWidth, window.innerHeight);
       this.animationRequestID = window.requestAnimationFrame(this.doAnimation);
     },
@@ -503,26 +493,7 @@ button.uiButton {
   background: rgba(255, 255, 255, 0);
   font-size: 16px;
 }
-button.uiButtonError {
-  width: 100%;
-  margin-bottom: 4px;
-  height: 30px;
-  text-align: center;
-  border: solid 2px red;
-  border-radius: 10px;
-  background: rgba(155, 9, 9, 0);
-  font-size: 16px;
-}
-button.uiButtonPassed {
-  width: 100%;
-  margin-bottom: 4px;
-  height: 30px;
-  text-align: center;
-  border: solid 2px green;
-  border-radius: 10px;
-  background: rgba(65, 206, 163, 0);
-  font-size: 16px;
-}
+
 #itersperms {
   display: block;
   background: rgba(255, 255, 255, 255);
