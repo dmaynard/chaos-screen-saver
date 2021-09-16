@@ -4,28 +4,42 @@
       id="mycanvas"
       ref="chaos-canvas"
       @click="resetAttractor(false)"
-    ></canvas>
-    <span class="menu-wrapper" style="width: 150px ">
+    />
+    <span
+      class="menu-wrapper"
+      style="width: 150px "
+    >
       <div v-if="menuUp">
-        <button class="close labeltag" v-on:click="toggleMenuUp">
+        <button
+          class="close labeltag"
+          @click="toggleMenuUp"
+        >
           X
         </button>
         <div v-if="paused">
-          <button ref="resume" class="uiButton" v-on:click="startAnimation">
+          <button
+            ref="resume"
+            class="uiButton"
+            @click="startAnimation"
+          >
             Resume
           </button>
         </div>
         <div v-else>
           <button
+            id="pauseButton"
             ref="pause"
             class="uiButton"
-            id="pauseButton"
-            v-on:click="pauseAnimation"
+            @click="pauseAnimation"
           >
             Pause
           </button>
         </div>
-        <button ref="next"  class="uiButton" v-on:click="resetAttractor(true)">
+        <button
+          ref="next"
+          class="uiButton"
+          @click="resetAttractor(true)"
+        >
           Next
         </button>
         <myprogressbar
@@ -33,16 +47,14 @@
           :bar-color="pbarcolor"
           :bg-color="pbgcolor"
           :val="progress"
-        >
-        </myprogressbar>
+        />
         <myprogressbar
           id="lastprogressbar"
           size="medium"
           :bar-color="tbarcolor"
           :bg-color="pbgcolor"
           :val="countdownpct"
-        >
-        </myprogressbar>
+        />
 
         <div>
           <vue-speedometer
@@ -50,15 +62,25 @@
             :value="meanItersPerMillisonds"
             :width="150"
             :height="100"
-            :maxValue="4000"
+            :max-value="4000"
           />
-          <label id="itersperms" align="center" for="Iterations"
-            >Pixels per ms
+          <label
+            id="itersperms"
+            align="center"
+            for="Iterations"
+          >Pixels per ms
           </label>
-          <button class="uiButton"  v-on:click="doTestAttractor">
+          <button
+            class="uiButton"
+            @click="doTestAttractor"
+          >
             Test
           </button>
-          <button class="uiButton" id="about" v-on:click="doAbout">
+          <button
+            id="about"
+            class="uiButton"
+            @click="doAbout"
+          >
             About
           </button>
         </div>
@@ -69,32 +91,30 @@
             id="menubutton"
             style="float: left"
             class="close labeltag"
-            v-on:click="toggleMenuUp"
+            @click="toggleMenuUp"
           >
             &#9776;
           </button>
         </span>
       </div>
-      <div v-if="menuUp"></div>
+      <div v-if="menuUp" />
       <div v-else>
         <myprogressbar
-          class="shorty"
           id="firstshortprogressbar"
+          class="shorty"
           size="small"
           :bar-color="pbarcolor"
           :bg-color="pbgcolor"
           :val="progress"
-        >
-        </myprogressbar>
+        />
         <myprogressbar
-          class="shorty"
           id="secondprogressbar"
+          class="shorty"
           size="small"
           :bar-color="tbarcolor"
           :bg-color="pbgcolor"
           :val="countdownpct"
-        >
-        </myprogressbar>
+        />
       </div>
     </span>
   </div>
@@ -112,6 +132,10 @@ import VueSpeedometer from "vue-speedometer";
 import { AttractorObj } from "@davidsmaynard/attractor_iterator";
 const logPerfArraySize = 6; // 2**6 = 64 perfSamples
 export default {
+  components: {
+    VueSpeedometer,
+    myprogressbar,
+  },
   data() {
     return {
       // This is the CanvasRenderingContext that children will draw to.
@@ -468,10 +492,6 @@ export default {
           : ((this.displayDelayDefault - delay) * 100) /
             this.displayDelayDefault;
     },
-  },
-  components: {
-    VueSpeedometer,
-    myprogressbar,
   },
 };
 </script>

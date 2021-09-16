@@ -1,13 +1,12 @@
 <template>
-  <div id="app" style="padding: 0px">
-
+  <div
+    id="app"
+    style="padding: 0px"
+  >
     <!-- These are the custom components we'll create -->
     <!-- Values for `my-box` are percentages of the width of the canvas. -->
     <!-- Each bar will take up an equal space of the canvas. -->
-    <chaos-canvas style="width: 100%; height: 100%;">
-    </chaos-canvas>
-
-
+    <chaos-canvas style="width: 100%; height: 100%;" />
   </div>
 </template>
 
@@ -20,7 +19,7 @@ Vue.config.errorHandler = function(err, vm, info) {
 }
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
     ChaosCanvas
   },
