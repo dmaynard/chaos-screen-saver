@@ -127,11 +127,9 @@
 import myprogressbar from "vue-simple-progress";
 import VueSpeedometer from "vue-speedometer";
 // import { AttractorObj } from "../modules/Attractor";
-// eslint-disable-next-line
-import { AttractorObj } from "../../../attractor_iterator/Attractor";
 // Add the following line in Package.json to use the npm package
 // "@davidsmaynard/attractor_iterator": "^0.1.4"
-//import { AttractorObj } from "@davidsmaynard/attractor_iterator";
+import { AttractorObj } from "@davidsmaynard/attractor_iterator";
 const logPerfArraySize = 6; // 2**6 = 64 perfSamples
 export default {
   components: {
