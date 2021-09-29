@@ -130,6 +130,11 @@ import VueSpeedometer from "vue-speedometer";
 // Add the following line in Package.json to use the npm package
 // "@davidsmaynard/attractor_iterator": "^0.1.4"
 import { AttractorObj } from "@davidsmaynard/attractor_iterator";
+import ('wasm_attractor_iterator').then (({ greet }) => {
+  // expose the "sum" import on the window object
+  // to be able to access it from the Cypress tests
+  window.greet = greet;
+  })
 const logPerfArraySize = 6; // 2**6 = 64 perfSamples
 export default {
   components: {
@@ -397,6 +402,7 @@ export default {
       // this.animationRequestID = window.requestAnimationFrame(this.doAnimation);
     },
     pauseAnimation() {
+      window.greet();
       this.paused = true;
     },
     resetAttractor() {
