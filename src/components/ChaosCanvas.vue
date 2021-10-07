@@ -1,27 +1,13 @@
 <template>
   <div class="chaos-canvas-wrapper">
-    <canvas
-      id="mycanvas"
-      ref="chaos-canvas"
-      @click="resetAttractor(false)"
-    />
-    <span
-      class="menu-wrapper"
-      style="width: 150px "
-    >
+    <canvas id="mycanvas" ref="chaos-canvas" @click="resetAttractor(false)" />
+    <span class="menu-wrapper" style="width: 150px ">
       <div v-if="menuUp">
-        <button
-          class="close labeltag"
-          @click="toggleMenuUp"
-        >
+        <button class="close labeltag" @click="toggleMenuUp">
           X
         </button>
         <div v-if="paused">
-          <button
-            ref="resume"
-            class="uiButton"
-            @click="startAnimation"
-          >
+          <button ref="resume" class="uiButton" @click="startAnimation">
             Resume
           </button>
         </div>
@@ -35,11 +21,7 @@
             Pause
           </button>
         </div>
-        <button
-          ref="next"
-          class="uiButton"
-          @click="resetAttractor(true)"
-        >
+        <button ref="next" class="uiButton" @click="resetAttractor(true)">
           Next
         </button>
         <myprogressbar
@@ -64,23 +46,13 @@
             :height="100"
             :max-value="4000"
           />
-          <label
-            id="itersperms"
-            align="center"
-            for="Iterations"
-          >Pixels per ms
+          <label id="itersperms" align="center" for="Iterations"
+            >Pixels per ms
           </label>
-          <button
-            class="uiButton"
-            @click="doTestAttractor"
-          >
+          <button class="uiButton" @click="doTestAttractor">
             Test
           </button>
-          <button
-            id="about"
-            class="uiButton"
-            @click="doAbout"
-          >
+          <button id="about" class="uiButton" @click="doAbout">
             About
           </button>
         </div>
@@ -130,11 +102,11 @@ import VueSpeedometer from "vue-speedometer";
 // Add the following line in Package.json to use the npm package
 // "@davidsmaynard/attractor_iterator": "^0.1.4"
 import { AttractorObj } from "@davidsmaynard/attractor_iterator";
-import ('wasm_attractor_iterator').then (({ greet }) => {
+import("wasm_attractor_iterator").then(({ greet }) => {
   // expose the "sum" import on the window object
   // to be able to access it from the Cypress tests
   window.greet = greet;
-  })
+});
 const logPerfArraySize = 6; // 2**6 = 64 perfSamples
 export default {
   components: {
@@ -180,6 +152,7 @@ export default {
       framePerfs: new Array(2 ** logPerfArraySize),
       meanItersPerMillisonds: 0,
       countdownpct: 0,
+      wasmGreet: import("wasm_attractor_iterator"),
       aboutUrl:
         "https://github.com/dmaynard/chaos-screen-saver/blob/master/README.md",
     };
@@ -403,6 +376,7 @@ export default {
     },
     pauseAnimation() {
       window.greet();
+      window.greet();
       this.paused = true;
     },
     resetAttractor() {
@@ -441,7 +415,11 @@ export default {
         this.randomize = true;
       }
       let startTime = performance.now();
-      loopCount = this.att.calculateFrame(this.msFrameBudget, init, this.initialIterations);
+      loopCount = this.att.calculateFrame(
+        this.msFrameBudget,
+        init,
+        this.initialIterations
+      );
       msElapsed = performance.now() - startTime;
       this.framePerfs[this.frames & (2 ** logPerfArraySize - 1)] =
         loopCount / msElapsed;
