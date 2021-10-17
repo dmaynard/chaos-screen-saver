@@ -102,11 +102,15 @@ import VueSpeedometer from "vue-speedometer";
 // Add the following line in Package.json to use the npm package
 // "@davidsmaynard/attractor_iterator": "^0.1.4"
 import { AttractorObj } from "@davidsmaynard/attractor_iterator";
-import("wasm_attractor_iterator").then(({ greet }) => {
-  // expose the "sum" import on the window object
-  // to be able to access it from the Cypress tests
-  window.greet = greet;
-});
+// import { greet } from "@davidsmaynard/rust-wasm-attractor";
+// import("@davidsmaynard/rust-wasm-attractor")
+//   .then((wasm) => {
+//     // expose the "sum" import on the window object
+//     // to be able to access it from the Cypress tests
+//     window.greet = wasm.greet;
+//     window.wasm = wasm;
+//   })
+// .catch((err) => alert("Failed to load wasm module" + err));
 const logPerfArraySize = 6; // 2**6 = 64 perfSamples
 export default {
   components: {
@@ -152,7 +156,8 @@ export default {
       framePerfs: new Array(2 ** logPerfArraySize),
       meanItersPerMillisonds: 0,
       countdownpct: 0,
-      wasmGreet: import("wasm_attractor_iterator"),
+      wasmPromise: null,
+      wasm: null,
       aboutUrl:
         "https://github.com/dmaynard/chaos-screen-saver/blob/master/README.md",
     };
@@ -198,6 +203,13 @@ export default {
     this.paused = false;
 
     this.animationRequestID = window.requestAnimationFrame(this.doAnimation);
+
+    // this.wasmPromise = import("File ../../../rust/rust-wasm-attractor")
+    this.wasmPromise = import("@davidsmaynard/rust-wasm-attractor")
+      .then((wasm) => {
+        this.wasm = wasm;
+      })
+      .catch((err) => alert("Failed to load wasm module" + err));
     this.att = new AttractorObj(true, this.width, this.height);
     // this.pbarcolor = "rgba(0, 225, 0, 0.3)";
     // this.pbgcolor = "rgba(255, 225, 255, 0.3)";
@@ -375,9 +387,9 @@ export default {
       // this.animationRequestID = window.requestAnimationFrame(this.doAnimation);
     },
     pauseAnimation() {
-      window.greet();
-      window.greet();
+      // window.greet();
       this.paused = true;
+      this.wasm ? this.wasm.greet() : alert(" wasm Module not loaded");
     },
     resetAttractor() {
       if (this.paused) {
