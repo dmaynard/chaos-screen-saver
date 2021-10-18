@@ -1,6 +1,6 @@
 # chaos-screen-saver
 
-Computes real time chaotic attractors to act as a browser based screen saver, as a visual meditation, and as a benchmark program to for single threaded JavaScript (ES6) performance on the given brower.
+Computes real time chaotic attractors to act as a browser based screen saver, as a visual meditation, and as a benchmark program to for single threaded JavaScript (ES6) performance on the given browser.
 
 ## Project setup
 
@@ -18,6 +18,20 @@ yarn serve
 
 ```
 yarn build
+```
+
+To change from npm published rust package to a local rust package
+
+```
+diff --git a/package.json b/package.json
+-    "@davidsmaynard/rust-wasm-attractor": "^0.1.0"
++    "rust-wasm-attractor": "file:../rust/rust-wasm-attractor/pkg"
+diff --git a/src/components/ChaosCanvas.vue b/src/components/ChaosCanvas.vue
+index 100166f..10af94f 100644
+--- a/src/components/ChaosCanvas.vue
++++ b/src/components/ChaosCanvas.vue
+-    this.wasmPromise = import("@davidsmaynard/rust-wasm-attractor")
++    this.wasmPromise = import("rust-wasm-attractor")
 ```
 
 ### History and Context

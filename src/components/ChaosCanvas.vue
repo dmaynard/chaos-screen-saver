@@ -205,7 +205,7 @@ export default {
     this.animationRequestID = window.requestAnimationFrame(this.doAnimation);
 
     // this.wasmPromise = import("File ../../../rust/rust-wasm-attractor")
-    this.wasmPromise = import("@davidsmaynard/rust-wasm-attractor")
+    this.wasmPromise = import("rust-wasm-attractor")
       .then((wasm) => {
         this.wasm = wasm;
       })

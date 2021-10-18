@@ -16,7 +16,7 @@
     "vue-simple-progress": "^1.1.1",
     "vue-speedometer": "^1.8.0",
     "@davidsmaynard/attractor_iterator": "^0.1.8",
-    "@davidsmaynard/rust-wasm-attractor": "^0.1.0"
+    "rust-wasm-attractor": "file:../rust/rust-wasm-attractor/pkg"
   },
   "devDependencies": {
     "@babel/core": "^7.13.8",
