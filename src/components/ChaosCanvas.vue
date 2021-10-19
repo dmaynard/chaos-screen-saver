@@ -1,13 +1,27 @@
 <template>
   <div class="chaos-canvas-wrapper">
-    <canvas id="mycanvas" ref="chaos-canvas" @click="resetAttractor(false)" />
-    <span class="menu-wrapper" style="width: 150px ">
+    <canvas
+      id="mycanvas"
+      ref="chaos-canvas"
+      @click="resetAttractor(false)"
+    />
+    <span
+      class="menu-wrapper"
+      style="width: 150px "
+    >
       <div v-if="menuUp">
-        <button class="close labeltag" @click="toggleMenuUp">
+        <button
+          class="close labeltag"
+          @click="toggleMenuUp"
+        >
           X
         </button>
         <div v-if="paused">
-          <button ref="resume" class="uiButton" @click="startAnimation">
+          <button
+            ref="resume"
+            class="uiButton"
+            @click="startAnimation"
+          >
             Resume
           </button>
         </div>
@@ -21,7 +35,11 @@
             Pause
           </button>
         </div>
-        <button ref="next" class="uiButton" @click="resetAttractor(true)">
+        <button
+          ref="next"
+          class="uiButton"
+          @click="resetAttractor(true)"
+        >
           Next
         </button>
         <myprogressbar
@@ -46,13 +64,23 @@
             :height="100"
             :max-value="4000"
           />
-          <label id="itersperms" align="center" for="Iterations"
-            >Pixels per ms
+          <label
+            id="itersperms"
+            align="center"
+            for="Iterations"
+          >Pixels per ms
           </label>
-          <button class="uiButton" @click="doTestAttractor">
+          <button
+            class="uiButton"
+            @click="doTestAttractor"
+          >
             Test
           </button>
-          <button id="about" class="uiButton" @click="doAbout">
+          <button
+            id="about"
+            class="uiButton"
+            @click="doAbout"
+          >
             About
           </button>
         </div>
@@ -95,23 +123,10 @@
 <script>
 /* eslint-disable no-console */
 
-// Todo eliminate extraneous UI and functions
 import myprogressbar from "vue-simple-progress";
 import VueSpeedometer from "vue-speedometer";
-// import { AttractorObj } from "../modules/Attractor";
-// Add the following line in Package.json to use the npm package
-// "@davidsmaynard/attractor_iterator": "^0.1.4"
 import { AttractorObj } from "@davidsmaynard/attractor_iterator";
-// import { greet } from "@davidsmaynard/rust-wasm-attractor";
-// import("@davidsmaynard/rust-wasm-attractor")
-//   .then((wasm) => {
-//     // expose the "sum" import on the window object
-//     // to be able to access it from the Cypress tests
-//     window.greet = wasm.greet;
-//     window.wasm = wasm;
-//   })
-// .catch((err) => alert("Failed to load wasm module" + err));
-const logPerfArraySize = 6; // 2**6 = 64 perfSamples
+const logPerfArraySize = 6;
 export default {
   components: {
     VueSpeedometer,
