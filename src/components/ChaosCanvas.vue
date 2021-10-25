@@ -122,7 +122,7 @@
 
 <script>
 /* eslint-disable no-console */
-
+/* eslint-disable */ 
 import myprogressbar from "vue-simple-progress";
 import VueSpeedometer from "vue-speedometer";
 import { AttractorObj } from "@davidsmaynard/attractor_iterator";
@@ -404,7 +404,8 @@ export default {
     pauseAnimation() {
       // window.greet();
       this.paused = true;
-      this.wasm ? this.wasm.greet() : alert(" wasm Module not loaded");
+      let dbl12 = this.wasm.double(12);
+      this.wasm ? this.wasm.greet(" Rust from Javascipt and back " + dbl12) : alert(" wasm Module not loaded");
     },
     resetAttractor() {
       if (this.paused) {
