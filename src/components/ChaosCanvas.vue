@@ -405,7 +405,18 @@ export default {
       // window.greet();
       this.paused = true;
       let dbl12 = this.wasm.double(12);
-      this.wasm ? this.wasm.greet(" Rust from Javascipt and back " + dbl12) : alert(" wasm Module not loaded");
+      let triple12 = this.wasm.triple(12);
+      let fib = this.wasm.fibonacci(13);
+      this.wasm ? this.wasm.greet(" Rust from Javascipt and back " + dbl12 + triple12 ) : alert(" wasm Module not loaded");
+      // for (let n =0;n < 10 ; n++) {
+      //   let fib = this.wasm.fibonacci(n);
+      //   this.wasm ? this.wasm.greet(" fibonacci(" + n +") " + fib) : alert(" wasm Module not loaded");
+      // }
+      for (let n =0;n < 10 ; n++) {
+        let fact = this.wasm.factorial(n);
+        this.wasm ? this.wasm.greet(" factorial(" + n +") " + fact) : alert(" wasm Module not loaded");
+        console.log(" factorial(" + n +") " + fact);
+      }
     },
     resetAttractor() {
       if (this.paused) {
