@@ -173,6 +173,7 @@ export default {
       countdownpct: 0,
       wasmPromise: null,
       wasm: null,
+      wasmbg: null,
       aboutUrl:
         "https://github.com/dmaynard/chaos-screen-saver/blob/master/README.md",
     };
@@ -225,7 +226,11 @@ export default {
         this.wasm = wasm;
       })
       .catch((err) => alert("Failed to load wasm module" + err));
-    this.att = new AttractorObj(true, this.width, this.height);
+    import("rust-wasm-memory/rust_wasm_attractor_bg.js")
+      .then((wasmbg) => {
+        this.wasmbg = wasmbg;
+      })
+      .catch((err) => alert("Failed to load wasm module" + err));this.att = new AttractorObj(true, this.width, this.height);
     // this.pbarcolor = "rgba(0, 225, 0, 0.3)";
     // this.pbgcolor = "rgba(255, 225, 255, 0.3)";
   },

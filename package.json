@@ -13,6 +13,7 @@
     "@davidsmaynard/attractor_iterator": "^0.1.8",
     "core-js": "^3.6.5",
     "rust-wasm-attractor": "link: rust-wasm-attractor",
+    "rust-wasm-memory": "file:../rust/rust-wasm-attractor/pkg",
     "serialize-javascript": "^4.0.0",
     "vue": "^2.6.12",
     "vue-simple-progress": "^1.1.1",
