@@ -226,7 +226,7 @@ export default {
         this.wasm = wasm;
       })
       .catch((err) => alert("Failed to load wasm module" + err));
-    import("rust-wasm-memory/rust_wasm_attractor_bg.js")
+    import("rust-wasm-attractor/rust_wasm_attractor_bg.js")
       .then((wasmbg) => {
         this.wasmbg = wasmbg;
       })
