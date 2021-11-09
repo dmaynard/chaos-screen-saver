@@ -126,6 +126,7 @@
 import myprogressbar from "vue-simple-progress";
 import VueSpeedometer from "vue-speedometer";
 import { AttractorObj } from "@davidsmaynard/attractor_iterator";
+// import { memory } from "rust-wasm-attractor/rust_wasm_attractor_bg"
 const logPerfArraySize = 6;
 export default {
   components: {
@@ -226,7 +227,7 @@ export default {
         this.wasm = wasm;
       })
       .catch((err) => alert("Failed to load wasm module" + err));
-    import("rust-wasm-attractor/rust_wasm_attractor_bg.js")
+    import("rust-wasm-attractor/rust_wasm_attractor_bg.wasm")
       .then((wasmbg) => {
         this.wasmbg = wasmbg;
       })
@@ -411,17 +412,12 @@ export default {
       this.paused = true;
       let dbl12 = this.wasm.double(12);
       let triple12 = this.wasm.triple(12);
-      let fib = this.wasm.fibonacci(13);
       this.wasm ? this.wasm.greet(" Rust from Javascipt and back " + dbl12 + triple12 ) : alert(" wasm Module not loaded");
       // for (let n =0;n < 10 ; n++) {
       //   let fib = this.wasm.fibonacci(n);
       //   this.wasm ? this.wasm.greet(" fibonacci(" + n +") " + fib) : alert(" wasm Module not loaded");
       // }
-      for (let n =0;n < 10 ; n++) {
-        let fact = this.wasm.factorial(n);
-        this.wasm ? this.wasm.greet(" factorial(" + n +") " + fact) : alert(" wasm Module not loaded");
-        console.log(" factorial(" + n +") " + fact);
-      }
+      console.log ("Wasmgb  memory buffer: " + this.wasmbg.memory.buffer)
     },
     resetAttractor() {
       if (this.paused) {
