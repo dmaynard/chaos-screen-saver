@@ -231,7 +231,9 @@ export default {
       .then((wasmbg) => {
         this.wasmbg = wasmbg;
       })
-      .catch((err) => alert("Failed to load wasm module" + err));this.att = new AttractorObj(true, this.width, this.height);
+      .catch((err) => alert("Failed to load wasm module" + err));
+      
+    this.att = new AttractorObj(true, this.width, this.height);
     // this.pbarcolor = "rgba(0, 225, 0, 0.3)";
     // this.pbgcolor = "rgba(255, 225, 255, 0.3)";
   },
