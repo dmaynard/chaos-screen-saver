@@ -167,7 +167,6 @@ export default {
       },
       animationRequestID: null,
       msFrameBudget: 13, // should be less than 16 for 60 fps.
-      clearScreen: true,
       att: null,
       framePerfs: new Array(2 ** logPerfArraySize),
       meanItersPerMillisonds: 0,
@@ -345,10 +344,8 @@ export default {
       this.iterateAttractor(
         this.startNewAttractor,
         this.randomize,
-        this.clearScreen
       );
       this.startNewAttractor = false;
-      this.clearScreen = true;
       if (this.att.getnTouched() > 0 && this.att.getnTouched() < 500) {
         this.startNewAttractor = true;
         this.displayDelay = 0;
@@ -429,10 +426,9 @@ export default {
       this.displayDelay = 0;
       this.startNewAttractor = true;
       this.randomize = true;
-      this.clearScreen = true;
     },
 
-    iterateAttractor(init, randomize, clearScreen) {
+    iterateAttractor(init, randomize) {
       // let nx = 0;
       // let ny = 0;
       let msElapsed = 1;
@@ -445,13 +441,6 @@ export default {
           this.width,
           this.height
         );
-        if (clearScreen) {
-          this.ctx.fillStyle = "rgba(255,255,255,1.0)";
-          this.ctx.fillRect(0, 0, this.width, this.height);
-          this.imageData = this.ctx.getImageData(0, 0, this.width, this.height);
-          this.data = this.imageData.data;
-        }
-
         this.randomize = true;
       }
       let startTime = performance.now();
@@ -483,7 +472,6 @@ export default {
     },
     drawAttractor() {
       this.displayDelay = 0;
-      this.clearScreen = false;
       this.randomize = false;
     },
     doAbout() {
