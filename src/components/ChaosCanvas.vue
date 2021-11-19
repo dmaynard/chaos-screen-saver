@@ -336,8 +336,8 @@ export default {
         return;
       }
 
-      this.prevMaxed = this.att ? this.att.nMaxed : 0;
-      this.prevTouched = this.att ? this.att.nTouched : 0;
+      this.prevMaxed = this.att ? this.att.getnMaxed() : 0;
+      this.prevTouched = this.att ? this.att.getnTouched() : 0;
       if (this.startNewAttractor) {
         this.startTime = performance.now();
       }
@@ -349,13 +349,13 @@ export default {
       );
       this.startNewAttractor = false;
       this.clearScreen = true;
-      if (this.att.nTouched > 0 && this.att.nTouched < 500) {
+      if (this.att.getnTouched() > 0 && this.att.getnTouched() < 500) {
         this.startNewAttractor = true;
         this.displayDelay = 0;
       }
       if (
-        this.att.nTouched == this.prevTouched &&
-        this.att.nMaxed == this.prevMaxed
+        this.att.getnTouched() == this.prevTouched &&
+        this.att.getnMaxed() == this.prevMaxed
       ) {
         this.nFramesSame++;
         if (this.nFramesSame > 120) {
@@ -369,13 +369,13 @@ export default {
         this.nFramesSame = 0;
       }
 
-      let percentMaxed = (this.att.nMaxed * 100) / this.att.nTouched;
+      let percentMaxed = (this.att.getnMaxed() * 100) / this.att.getnTouched();
       this.progress = Math.min((percentMaxed * 100) / this.enoughMaxed, 100);
       this.calculateProgress(this.displayDelay);
       if (percentMaxed > this.enoughMaxed) {
         this.startNewAttractor = true;
         this.displayDelay =
-          this.att.nTouched > 5000 ? this.displayDelayDefault : 0;
+          this.att.getnTouched() > 5000 ? this.displayDelayDefault : 0;
         // console.log(
         //   this.nTouched +
         //     " touched " +
@@ -440,12 +440,10 @@ export default {
 
       if (init) {
         this.frames = 0;
-        let savedParams = [...this.att.params];
         this.att = new AttractorObj(
           randomize,
           this.width,
-          this.height,
-          savedParams
+          this.height
         );
         if (clearScreen) {
           this.ctx.fillStyle = "rgba(255,255,255,1.0)";
@@ -495,15 +493,6 @@ export default {
       );
     },
     doTestAttractor() {
-      let testParam = [
-        -2.3983540752995394,
-        -1.8137134453341095,
-        0.010788338377923257,
-        1.0113015602664608,
-        0.1,
-        0.1,
-      ];
-      this.att.params = [...testParam];
       this.randomize = false;
       this.startNewAttractor = true;
       this.att.iters = 0;

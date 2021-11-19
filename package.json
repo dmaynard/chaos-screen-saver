@@ -10,7 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.13.8",
-    "@davidsmaynard/attractor_iterator": "^0.1.8",
+    "@davidsmaynard/attractor_iterator": "link: @davidsmaynard/attractor_iterator",
     "core-js": "^3.6.5",
     "rust-wasm-attractor": "link: rust-wasm-attractor",
     "serialize-javascript": "^4.0.0",
