@@ -3,7 +3,7 @@ module.exports = {
   configureWebpack: {
     externals: {
       experiments: {
-        asyncWebAssembly: false,
+        asyncWebAssembly: true,
       },
     },
   },

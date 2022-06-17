@@ -409,15 +409,31 @@ export default {
     pauseAnimation() {
       // window.greet();
       this.paused = true;
+      this.testRust();
       let dbl12 = this.wasm.double(12);
       let triple12 = this.wasm.triple(12);
-      this.wasm ? this.wasm.greet(" Rust from Javascipt and back " + dbl12 + triple12 ) : alert(" wasm Module not loaded");
+      this.wasm ? this.wasm.greet(" Rust from Javascipt and back " + dbl12 + "triple: " + triple12 ) : alert(" wasm Module not loaded");
       // for (let n =0;n < 10 ; n++) {
       //   let fib = this.wasm.fibonacci(n);
       //   this.wasm ? this.wasm.greet(" fibonacci(" + n +") " + fib) : alert(" wasm Module not loaded");
       // }
-      console.log ("Wasmgb  memory buffer: " + this.wasmbg.memory.buffer)
+      // console.log ("Wasmgb  memory buffer: " + this.wasmbg.memory.buffer);
     },
+    testRust() {
+      let dbl12 = this.wasm.double(12);
+      let triple12 = this.wasm.triple(12);
+      let ao = this.wasm.AttractorObj.new(false,this.width,this.height);
+      const dataPtr = ao.data();
+      this.wasmbg.memory.buffer
+      const pixels = new Uint8Array(this.wasmbg.memory.buffer, dataPtr, this.width * this.height);
+      this.imageData.data.set(this.att.data);
+      this.ctx.putImageData(this.imageData, 0, 0);
+      this.imageData.data.set(pixels);
+      this.ctx.putImageData(this.imageData, 0, 0);
+      this.wasm ? this.wasm.greet(" Rust from Javascipt and back " + dbl12 + "triple: " + triple12 ) : alert(" wasm Module not loaded");
+  
+    },
+
     resetAttractor() {
       if (this.paused) {
         this.paused = false;
@@ -472,7 +488,7 @@ export default {
     },
     drawAttractor() {
       this.displayDelay = 0;
-      this.randomize = false;
+     // this.randomize = false;
     },
     doAbout() {
       window.open(

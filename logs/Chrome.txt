@@ -1,0 +1,242 @@
+  DecPixelTime:         0
+  DecPixelDataViewTime: 10793.59997010231
+  calculateTime: 30853.000014305115
+ Pecent in DecPixel: 34.98395606617773
+ n: 7 DecPixel: 7.900000333786011 DataView: 15726.799962043762
+  DecPixelTime:         12207.599975824356
+  DecPixelDataViewTime: 0
+  calculateTime: 32326.000013828278
+ Pecent in DecPixel: 37.7640288640792
+ n: 8 DecPixel: 12215.499976158142 DataView: 15726.799962043762
+  DecPixelTime:         0
+  DecPixelDataViewTime: 10821.699964523315
+  calculateTime: 30710.400011777878
+ Pecent in DecPixel: 35.237899735506666
+ n: 9 DecPixel: 12215.499976158142 DataView: 26548.499926567078
+  DecPixelTime:         12007.099975585938
+  DecPixelDataViewTime: 0
+  calculateTime: 32153.200012922287
+ Pecent in DecPixel: 37.34340585310425
+ n: 10 DecPixel: 24222.59995174408 DataView: 26548.499926567078
+  DecPixelTime:         0
+  DecPixelDataViewTime: 10637.099984169006
+  calculateTime: 30421.800014972687
+ Pecent in DecPixel: 34.96538659426381
+ n: 11 DecPixel: 24222.59995174408 DataView: 37185.599910736084
+  DecPixelTime:         11910.300019025803
+  DecPixelDataViewTime: 0
+  calculateTime: 32155.00001692772
+ Pecent in DecPixel: 37.04027371405918
+ n: 12 DecPixel: 36132.89997076988 DataView: 37185.599910736084
+  DecPixelTime:         0
+  DecPixelDataViewTime: 10505.799961566925
+  calculateTime: 30355.80001115799
+ Pecent in DecPixel: 34.60887197077748
+ n: 13 DecPixel: 36132.89997076988 DataView: 47691.39987230301
+  DecPixelTime:         12030.399973630905
+  DecPixelDataViewTime: 0
+  calculateTime: 32441.300022363663
+ Pecent in DecPixel: 37.0835939538109
+ n: 14 DecPixel: 48163.29994440079 DataView: 47691.39987230301
+  DecPixelTime:         0
+  DecPixelDataViewTime: 10623.899990797043
+  calculateTime: 30648.000010967255
+ Pecent in DecPixel: 34.664252111052356
+ n: 15 DecPixel: 48163.29994440079 DataView: 58315.29986310005
+  DecPixelTime:         11773.699992656708
+  DecPixelDataViewTime: 0
+  calculateTime: 32081.500014305115
+ Pecent in DecPixel: 36.6993438193564
+ n: 16 DecPixel: 59936.999937057495 DataView: 58315.29986310005
+  DecPixelTime:         0
+  DecPixelDataViewTime: 10523.099977731705
+  calculateTime: 30448.900014400482
+ Pecent in DecPixel: 34.559869068356875
+ n: 17 DecPixel: 59936.999937057495 DataView: 68838.39984083176
+  DecPixelTime:         12109.399976968765
+  DecPixelDataViewTime: 0
+  calculateTime: 32585.50001502037
+ Pecent in DecPixel: 37.16192776353564
+ n: 18 DecPixel: 72046.39991402626 DataView: 68838.39984083176
+  DecPixelTime:         0
+  DecPixelDataViewTime: 10549.399995326996
+  calculateTime: 30460.8000125885
+ Pecent in DecPixel: 34.632708238021515
+ n: 19 DecPixel: 72046.39991402626 DataView: 79387.79983615875
+  DecPixelTime:         11862.499998092651
+  DecPixelDataViewTime: 0
+  calculateTime: 32207.100014925003
+ Pecent in DecPixel: 36.83194076025312
+ n: 20 DecPixel: 83908.89991211891 DataView: 79387.79983615875
+  DecPixelTime:         0
+  DecPixelDataViewTime: 10633.900018930435
+  calculateTime: 30605.400014162064
+ Pecent in DecPixel: 34.74517573372608
+ n: 21 DecPixel: 83908.89991211891 DataView: 90021.69985508919
+  DecPixelTime:         11939.699970245361
+  DecPixelDataViewTime: 0
+  calculateTime: 32414.200011491776
+ Pecent in DecPixel: 36.834782181921476
+ n: 22 DecPixel: 95848.59988236427 DataView: 90021.69985508919
+  DecPixelTime:         0
+  DecPixelDataViewTime: 10929.599997758865
+  calculateTime: 31282.900017023087
+ Pecent in DecPixel: 34.93793731339278
+ n: 23 DecPixel: 95848.59988236427 DataView: 100951.29985284805
+  DecPixelTime:         11842.700008153915
+  DecPixelDataViewTime: 0
+  calculateTime: 32167.20001268387
+ Pecent in DecPixel: 36.8160735267111
+ n: 24 DecPixel: 107691.29989051819 DataView: 100951.29985284805
+  DecPixelTime:         0
+  DecPixelDataViewTime: 10479.599999666214
+  calculateTime: 30462.2000143528
+ Pecent in DecPixel: 34.40198014171192
+ n: 25 DecPixel: 107691.29989051819 DataView: 111430.89985251427
+  DecPixelTime:         11824.199985027313
+  DecPixelDataViewTime: 0
+  calculateTime: 32208.800014019012
+ Pecent in DecPixel: 36.711085106805534
+ n: 26 DecPixel: 119515.4998755455 DataView: 111430.89985251427
+  DecPixelTime:         0
+  DecPixelDataViewTime: 10570.399978876114
+  calculateTime: 30726.20001244545
+ Pecent in DecPixel: 34.40191098995203
+ n: 27 DecPixel: 119515.4998755455 DataView: 122001.29983139038
+  DecPixelTime:         11765.099984645844
+  DecPixelDataViewTime: 0
+  calculateTime: 32217.600012540817
+ Pecent in DecPixel: 36.51761763777015
+ n: 28 DecPixel: 131280.59986019135 DataView: 122001.29983139038
+  DecPixelTime:         0
+  DecPixelDataViewTime: 10438.599984884262
+  calculateTime: 30449.400013446808
+ Pecent in DecPixel: 34.281792023075845
+ n: 29 DecPixel: 131280.59986019135 DataView: 132439.89981627464
+  DecPixelTime:         11746.80000782013
+  DecPixelDataViewTime: 0
+  calculateTime: 32089.8000164032
+ Pecent in DecPixel: 36.60602434984192
+ n: 30 DecPixel: 143027.39986801147 DataView: 132439.89981627464
+  DecPixelTime:         0
+  DecPixelDataViewTime: 10465.099973678589
+  calculateTime: 30497.60001015663
+ Pecent in DecPixel: 34.314503338601696
+ n: 31 DecPixel: 143027.39986801147 DataView: 142904.99978995323
+  DecPixelTime:         11892.199980735779
+  DecPixelDataViewTime: 0
+  calculateTime: 32208.400017023087
+ Pecent in DecPixel: 36.92266605745831
+ n: 32 DecPixel: 154919.59984874725 DataView: 142904.99978995323
+  DecPixelTime:         0
+  DecPixelDataViewTime: 10452.000038146973
+  calculateTime: 30384.60001516342
+ Pecent in DecPixel: 34.39900486737
+ n: 33 DecPixel: 154919.59984874725 DataView: 153356.9998281002
+  DecPixelTime:         11786.299966812134
+  DecPixelDataViewTime: 0
+  calculateTime: 32193.600014209747
+ Pecent in DecPixel: 36.610692689260745
+ n: 34 DecPixel: 166705.8998155594 DataView: 153356.9998281002
+  DecPixelTime:         0
+  DecPixelDataViewTime: 10476.400000095367
+  calculateTime: 30421.700011968613
+ Pecent in DecPixel: 34.43726023191901
+ n: 35 DecPixel: 166705.8998155594 DataView: 163833.39982819557
+  DecPixelTime:         12095.799996614456
+  DecPixelDataViewTime: 0
+  calculateTime: 32611.900015115738
+ Pecent in DecPixel: 37.09014191447909
+ n: 36 DecPixel: 178801.69981217384 DataView: 163833.39982819557
+  DecPixelTime:         0
+  DecPixelDataViewTime: 10496.899985074997
+  calculateTime: 30551.700009584427
+ Pecent in DecPixel: 34.357826182444825
+ n: 37 DecPixel: 178801.69981217384 DataView: 174330.29981327057
+  DecPixelTime:         12268.099940299988
+  DecPixelDataViewTime: 0
+  calculateTime: 32957.90001344681
+ Pecent in DecPixel: 37.22354863415026
+ n: 38 DecPixel: 191069.79975247383 DataView: 174330.29981327057
+  DecPixelTime:         0
+  DecPixelDataViewTime: 10587.700054168701
+  calculateTime: 30570.20001935959
+ Pecent in DecPixel: 34.63405554253387
+ n: 39 DecPixel: 191069.79975247383 DataView: 184917.99986743927
+  DecPixelTime:         11941.59994316101
+  DecPixelDataViewTime: 0
+  calculateTime: 32286.300016880035
+ Pecent in DecPixel: 36.98658544620369
+ n: 40 DecPixel: 203011.39969563484 DataView: 184917.99986743927
+  DecPixelTime:         0
+  DecPixelDataViewTime: 10480.600043773651
+  calculateTime: 30381.10000729561
+ Pecent in DecPixel: 34.49710524390782
+ n: 41 DecPixel: 203011.39969563484 DataView: 195398.59991121292
+  DecPixelTime:         11917.599973678589
+  DecPixelDataViewTime: 0
+  calculateTime: 32380.700013637543
+ Pecent in DecPixel: 36.80463970408095
+ n: 42 DecPixel: 214928.99966931343 DataView: 195398.59991121292
+  DecPixelTime:         0
+  DecPixelDataViewTime: 10446.699985980988
+  calculateTime: 30397.900010824203
+ Pecent in DecPixel: 34.366518681425646
+ n: 43 DecPixel: 214928.99966931343 DataView: 205845.2998971939
+  DecPixelTime:         11784.400008678436
+  DecPixelDataViewTime: 0
+  calculateTime: 32010.600017547607
+ Pecent in DecPixel: 36.81405535109761
+ n: 44 DecPixel: 226713.39967799187 DataView: 205845.2998971939
+  DecPixelTime:         0
+  DecPixelDataViewTime: 10449.199997663498
+  calculateTime: 30307.100016593933
+ Pecent in DecPixel: 34.47772961432234
+ n: 45 DecPixel: 226713.39967799187 DataView: 216294.4998948574
+  DecPixelTime:         11912.20001411438
+  DecPixelDataViewTime: 0
+  calculateTime: 32389.40001964569
+ Pecent in DecPixel: 36.778081739362484
+ n: 46 DecPixel: 238625.59969210625 DataView: 216294.4998948574
+  DecPixelTime:         0
+  DecPixelDataViewTime: 10418.500006437302
+  calculateTime: 30293.00001144409
+ Pecent in DecPixel: 34.3924339038768
+ n: 47 DecPixel: 238625.59969210625 DataView: 226712.9999012947
+  DecPixelTime:         11750.299970626831
+  DecPixelDataViewTime: 0
+  calculateTime: 32024.6000123024
+ Pecent in DecPixel: 36.6914808182238
+ n: 48 DecPixel: 250375.89966273308 DataView: 226712.9999012947
+  DecPixelTime:         0
+  DecPixelDataViewTime: 10363.50000834465
+  calculateTime: 30306.70001602173
+ Pecent in DecPixel: 34.19540894543436
+ n: 49 DecPixel: 250375.89966273308 DataView: 237076.49990963936
+  DecPixelTime:         11858.700002908707
+  DecPixelDataViewTime: 0
+  calculateTime: 32204.90001487732
+ Pecent in DecPixel: 36.82265741371804
+ n: 50 DecPixel: 262234.5996656418 DataView: 237076.49990963936
+  DecPixelTime:         0
+  DecPixelDataViewTime: 10391.000040054321
+  calculateTime: 30343.60001039505
+ Pecent in DecPixel: 34.24445364589104
+ n: 51 DecPixel: 262234.5996656418 DataView: 247467.49994969368
+  DecPixelTime:         11840.099997520447
+  DecPixelDataViewTime: 0
+  calculateTime: 32141.700013399124
+ Pecent in DecPixel: 36.83719278253666
+ n: 52 DecPixel: 274074.69966316223 DataView: 247467.49994969368
+  DecPixelTime:         0
+  DecPixelDataViewTime: 10468.29998922348
+  calculateTime: 30615.600012540817
+ Pecent in DecPixel: 34.19269909763466
+ n: 53 DecPixel: 274074.69966316223 DataView: 257935.79993891716
+  DecPixelTime:         12344.300030469894
+  DecPixelDataViewTime: 0
+  calculateTime: 33291.70001459122
+ Pecent in DecPixel: 37.07921201098047
+ n: 54 DecPixel: 286418.9996936321 DataView: 257935.79993891716
+
+ DataView took 90.055 % of the time DecPixel did
