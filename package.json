@@ -18,6 +18,7 @@
     "vue-simple-progress": "^1.1.1",
     "vue-speedometer": "^1.8.0"
   },
+
   "devDependencies": {
     "@babel/core": "^7.13.8",
     "@babel/preset-env": "^7.13.8",

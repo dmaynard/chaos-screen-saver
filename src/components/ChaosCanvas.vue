@@ -76,6 +76,27 @@
           >
             Test
           </button>
+          <div v-if="useRust">
+            <button
+              id="useES6Button"
+              ref="useES6"
+              class="uiButton"
+              @click="switchToES6"
+            >
+              Use ES6
+            </button>
+          </div>
+          <div v-else>
+            <button
+              id="useRustButton"
+              ref="useRust"
+              class="uiButton"
+              @click="switchToRust"
+            >
+              Use Rust
+            </button>
+           
+          </div>
           <button
             id="about"
             class="uiButton"
@@ -83,6 +104,8 @@
           >
             About
           </button>
+
+          
         </div>
       </div>
       <div v-else>
@@ -131,7 +154,7 @@ const logPerfArraySize = 6;
 export default {
   components: {
     VueSpeedometer,
-    myprogressbar,
+    myprogressbar
   },
   data() {
     return {
@@ -174,6 +197,7 @@ export default {
       wasmPromise: null,
       wasm: null,
       wasmbg: null,
+      useRust: false,
       aboutUrl:
         "https://github.com/dmaynard/chaos-screen-saver/blob/master/README.md",
     };
@@ -423,15 +447,24 @@ export default {
       let dbl12 = this.wasm.double(12);
       let triple12 = this.wasm.triple(12);
       let ao = this.wasm.AttractorObj.new(false,this.width,this.height);
-      const dataPtr = ao.data();
-      this.wasmbg.memory.buffer
-      const pixels = new Uint8Array(this.wasmbg.memory.buffer, dataPtr, this.width * this.height);
-      this.imageData.data.set(this.att.data);
+      const dataPtr = ao.pixels();
+      ao.data = new Uint8Array(this.wasmbg.memory.buffer, dataPtr, this.width * this.height*4);
+      this.imageData.data.set(ao.data);
       this.ctx.putImageData(this.imageData, 0, 0);
-      this.imageData.data.set(pixels);
-      this.ctx.putImageData(this.imageData, 0, 0);
+      this.invert();
+
       this.wasm ? this.wasm.greet(" Rust from Javascipt and back " + dbl12 + "triple: " + triple12 ) : alert(" wasm Module not loaded");
   
+    },
+    doToggleRust() {
+
+    },
+    
+    switchToRust () {
+        this.useRust = true;
+    },
+     switchToES6 () {
+        this.useRust = false;
     },
 
     resetAttractor() {
