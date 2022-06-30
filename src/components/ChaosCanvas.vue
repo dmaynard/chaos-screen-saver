@@ -1,5 +1,8 @@
 <template>
   <div class="chaos-canvas-wrapper">
+    <h3 align="center">
+      Using {{ language }}
+    </h3>
     <canvas
       id="mycanvas"
       ref="chaos-canvas"
@@ -9,6 +12,7 @@
       class="menu-wrapper"
       style="width: 150px "
     >
+
       <div v-if="menuUp">
         <button
           class="close labeltag"
@@ -62,7 +66,7 @@
             :value="meanItersPerMillisonds"
             :width="150"
             :height="100"
-            :max-value="4000"
+            :max-value="20000"
           />
           <label
             id="itersperms"
@@ -171,7 +175,7 @@ export default {
       startNewAttractor: true,
       displayDelayDefault: 600,
       displayDelay: 0,
-      initialIterations: 20000,
+      initialIterations: 10000,
 
       pbarcolor: "rgba(0,200,0,0.5)",
       tbarcolor: "rgba(240,180,0,0.5)",
@@ -198,6 +202,7 @@ export default {
       wasm: null,
       wasmbg: null,
       useRust: false,
+      language: "ES6 (Javascript)",
       aboutUrl:
         "https://github.com/dmaynard/chaos-screen-saver/blob/master/README.md",
     };
@@ -256,7 +261,7 @@ export default {
       })
       .catch((err) => alert("Failed to load wasm module" + err));
       
-    this.att = new AttractorObj(true, this.width, this.height);
+    this.att = this.allocAttractorObj();
     // this.pbarcolor = "rgba(0, 225, 0, 0.3)";
     // this.pbgcolor = "rgba(255, 225, 255, 0.3)";
   },
@@ -316,6 +321,7 @@ export default {
         this.att.data[i + 2] ^= b; // blue
       }
     },
+ 
     zeroImage() {
       for (var i = 0; i < this.att.data.length; i += 4) {
         this.att.data[i] = 0; // red
@@ -451,7 +457,8 @@ export default {
       ao.data = new Uint8Array(this.wasmbg.memory.buffer, dataPtr, this.width * this.height*4);
       this.imageData.data.set(ao.data);
       this.ctx.putImageData(this.imageData, 0, 0);
-      this.invert();
+      this.invert(0xFF,0xFF,0xFF);
+      this.ctx.putImageData(this.imageData, 0, 0);
 
       this.wasm ? this.wasm.greet(" Rust from Javascipt and back " + dbl12 + "triple: " + triple12 ) : alert(" wasm Module not loaded");
   
@@ -462,9 +469,13 @@ export default {
     
     switchToRust () {
         this.useRust = true;
+        this.language = "Rust";
+        this.resetAttractor();
     },
      switchToES6 () {
         this.useRust = false;
+         this.language = "Javascript";
+        this.resetAttractor();
     },
 
     resetAttractor() {
@@ -485,7 +496,7 @@ export default {
 
       if (init) {
         this.frames = 0;
-        this.att = new AttractorObj(
+        this.att = this.allocAttractorObj(
           randomize,
           this.width,
           this.height
@@ -532,7 +543,6 @@ export default {
     doTestAttractor() {
       this.randomize = false;
       this.startNewAttractor = true;
-      this.att.iters = 0;
       this.att.calculateFrame(this.msFrameBudget, true, this.initialIterations);
       this.initImageData(window.innerWidth, window.innerHeight);
       this.animationRequestID = window.requestAnimationFrame(this.doAnimation);
@@ -543,6 +553,19 @@ export default {
           ? 0
           : ((this.displayDelayDefault - delay) * 100) /
             this.displayDelayDefault;
+    },
+   allocAttractorObj(randomize, w, h) {
+      if (this.useRust) {
+       let ao = this.wasm.AttractorObj.new(randomize, this.width,this.height);
+       const dataPtr = ao.pixels();
+       ao.data = new Uint8Array(this.wasmbg.memory.buffer, dataPtr, this.width * this.height*4);
+       this.imageData.data.set(ao.data);
+       this.ctx.putImageData(this.imageData, 0, 0);
+      return ao;
+
+      } else
+       return new AttractorObj(randomize, this.width, this.height);
+     // this.randomize = false;
     },
   },
 };
@@ -630,5 +653,8 @@ span.menu-wrapper {
 .inline {
   margin-top: 10px;
   vertical-align: middle;
+}
+p {
+  font-size: 14px;
 }
 </style>
