@@ -97,7 +97,7 @@
               class="uiButton"
               @click="switchToRust"
             >
-              Use Rust
+              Use Rust=>WASM
             </button>
            
           </div>
@@ -168,7 +168,7 @@ export default {
       imageData: null,
       putImageData: null,
       data: null,
-      randomize: true,
+      randomize: 0, // 0 randomize, 1 test case, 2 same as last
       frames: 0,
       iters: 0,
       paused: false,
@@ -192,6 +192,8 @@ export default {
         width: 0,
         height: 0,
       },
+      x: 0.1,
+      y: 0.1,
       animationRequestID: null,
       msFrameBudget: 13, // should be less than 16 for 60 fps.
       att: null,
@@ -202,7 +204,7 @@ export default {
       wasm: null,
       wasmbg: null,
       useRust: false,
-      language: "ES6 (Javascript)",
+      language: "ES6 to Javascript",
       aboutUrl:
         "https://github.com/dmaynard/chaos-screen-saver/blob/master/README.md",
     };
@@ -259,7 +261,7 @@ export default {
       .then((wasmbg) => {
         this.wasmbg = wasmbg;
       })
-      .catch((err) => alert("Failed to load wasm module" + err));
+      .catch((err) => alert("Failed to load wasmbg module" + err));
       
     this.att = this.allocAttractorObj();
     // this.pbarcolor = "rgba(0, 225, 0, 0.3)";
@@ -299,7 +301,7 @@ export default {
         if (this.animationRequestID) {
           window.cancelAnimationFrame(this.animationRequestID);
         }
-        this.randomize = false;
+        this.randomize = 2;
         this.startNewAttractor = true;
         this.initImageData(window.innerWidth, window.innerHeight);
         this.animationRequestID = window.requestAnimationFrame(
@@ -365,8 +367,8 @@ export default {
         return;
       }
 
-      this.prevMaxed = this.att ? this.att.getnMaxed() : 0;
-      this.prevTouched = this.att ? this.att.getnTouched() : 0;
+      this.prevMaxed = this.att ? this.att.getn_maxed() : 0;
+      this.prevTouched = this.att ? this.att.getn_touched() : 0;
       if (this.startNewAttractor) {
         this.startTime = performance.now();
       }
@@ -376,13 +378,13 @@ export default {
         this.randomize,
       );
       this.startNewAttractor = false;
-      if (this.att.getnTouched() > 0 && this.att.getnTouched() < 500) {
+      if (this.att.getn_touched() > 0 && this.att.getn_touched() < 500) {
         this.startNewAttractor = true;
         this.displayDelay = 0;
       }
       if (
-        this.att.getnTouched() == this.prevTouched &&
-        this.att.getnMaxed() == this.prevMaxed
+        this.att.getn_touched() == this.prevTouched &&
+        this.att.getn_maxed() == this.prevMaxed
       ) {
         this.nFramesSame++;
         if (this.nFramesSame > 120) {
@@ -396,13 +398,13 @@ export default {
         this.nFramesSame = 0;
       }
 
-      let percentMaxed = (this.att.getnMaxed() * 100) / this.att.getnTouched();
+      let percentMaxed = (this.att.getn_maxed() * 100) / this.att.getn_touched();
       this.progress = Math.min((percentMaxed * 100) / this.enoughMaxed, 100);
       this.calculateProgress(this.displayDelay);
       if (percentMaxed > this.enoughMaxed) {
         this.startNewAttractor = true;
         this.displayDelay =
-          this.att.getnTouched() > 5000 ? this.displayDelayDefault : 0;
+          this.att.getn_touched() > 5000 ? this.displayDelayDefault : 0;
         // console.log(
         //   this.nTouched +
         //     " touched " +
@@ -439,42 +441,22 @@ export default {
     pauseAnimation() {
       // window.greet();
       this.paused = true;
-      this.testRust();
-      let dbl12 = this.wasm.double(12);
-      let triple12 = this.wasm.triple(12);
-      this.wasm ? this.wasm.greet(" Rust from Javascipt and back " + dbl12 + "triple: " + triple12 ) : alert(" wasm Module not loaded");
-      // for (let n =0;n < 10 ; n++) {
-      //   let fib = this.wasm.fibonacci(n);
-      //   this.wasm ? this.wasm.greet(" fibonacci(" + n +") " + fib) : alert(" wasm Module not loaded");
-      // }
-      // console.log ("Wasmgb  memory buffer: " + this.wasmbg.memory.buffer);
     },
-    testRust() {
-      let dbl12 = this.wasm.double(12);
-      let triple12 = this.wasm.triple(12);
-      let ao = this.wasm.AttractorObj.new(false,this.width,this.height);
-      const dataPtr = ao.pixels();
-      ao.data = new Uint8Array(this.wasmbg.memory.buffer, dataPtr, this.width * this.height*4);
-      this.imageData.data.set(ao.data);
-      this.ctx.putImageData(this.imageData, 0, 0);
-      this.invert(0xFF,0xFF,0xFF);
-      this.ctx.putImageData(this.imageData, 0, 0);
-
-      this.wasm ? this.wasm.greet(" Rust from Javascipt and back " + dbl12 + "triple: " + triple12 ) : alert(" wasm Module not loaded");
   
-    },
     doToggleRust() {
 
     },
     
     switchToRust () {
         this.useRust = true;
-        this.language = "Rust";
+        this.language = "Rust to Web Assembly";
+        this.randomize = 2; 
         this.resetAttractor();
     },
      switchToES6 () {
         this.useRust = false;
-         this.language = "Javascript";
+        this.language = "ES6 to Javascript";
+        this.randomize = 2; 
         this.resetAttractor();
     },
 
@@ -485,7 +467,6 @@ export default {
       }
       this.displayDelay = 0;
       this.startNewAttractor = true;
-      this.randomize = true;
     },
 
     iterateAttractor(init, randomize) {
@@ -497,14 +478,13 @@ export default {
       if (init) {
         this.frames = 0;
         this.att = this.allocAttractorObj(
-          randomize,
           this.width,
           this.height
         );
-        this.randomize = true;
+    
       }
       let startTime = performance.now();
-      loopCount = this.att.calculateFrame(
+      loopCount = this.att.calculate_frame(
         this.msFrameBudget,
         init,
         this.initialIterations
@@ -530,10 +510,6 @@ export default {
       this.imageData.data.set(this.att.data);
       this.ctx.putImageData(this.imageData, 0, 0);
     },
-    drawAttractor() {
-      this.displayDelay = 0;
-     // this.randomize = false;
-    },
     doAbout() {
       window.open(
         this.aboutUrl,
@@ -541,9 +517,9 @@ export default {
       );
     },
     doTestAttractor() {
-      this.randomize = false;
+      this.randomize = 1;
       this.startNewAttractor = true;
-      this.att.calculateFrame(this.msFrameBudget, true, this.initialIterations);
+      this.att.calculate_frame(this.msFrameBudget, true, this.initialIterations);
       this.initImageData(window.innerWidth, window.innerHeight);
       this.animationRequestID = window.requestAnimationFrame(this.doAnimation);
     },
@@ -554,18 +530,43 @@ export default {
           : ((this.displayDelayDefault - delay) * 100) /
             this.displayDelayDefault;
     },
-   allocAttractorObj(randomize, w, h) {
+   allocAttractorObj( w, h) {
+      switch (this.randomize) {
+	       case 0:
+          this.a = 3.0 * (Math.random() * 2.0 - 1.0);
+          this.b = 3.0 * (Math.random() * 2.0 - 1.0);
+          this.c = Math.random() * 2.0 - 1.0 + 0.5;
+          this.d = Math.random() * 2.0 - 1.0 + 0.5;
+	        break;
+	      case  1:
+          this.a =  -2.3983540752995394;
+          this.b = -1.8137134453341095;
+          this.c = 0.010788338377923257;
+          this.d = 1.0113015602664608;
+          this.randomize = 0;
+	        break;
+	      case  2:
+	         break;   
+       default:
+       }
       if (this.useRust) {
-       let ao = this.wasm.AttractorObj.new(randomize, this.width,this.height);
+        if (this.att) {
+          this.att.free_pixels();  // free the previous pixel buffer
+        }
+       let ao = this.wasm.AttractorObj.new( this.width, this.height, this.x, 
+                this.y, this.a, this.b, this.c, this.d);
        const dataPtr = ao.pixels();
        ao.data = new Uint8Array(this.wasmbg.memory.buffer, dataPtr, this.width * this.height*4);
        this.imageData.data.set(ao.data);
        this.ctx.putImageData(this.imageData, 0, 0);
-      return ao;
+       this.randomize = 0;
+       return ao;
 
       } else
-       return new AttractorObj(randomize, this.width, this.height);
-     // this.randomize = false;
+       this.randomize = 0;
+       return new AttractorObj( this.width,this.height, this.x, 
+                this.y, this.a, this.b, this.c, this.d);
+     
     },
   },
 };
