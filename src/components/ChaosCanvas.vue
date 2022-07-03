@@ -50,7 +50,7 @@
             class="uiButton"
             @click="switchToRust"
           >
-            Use Rust
+            Use WASM
           </button>
            
         </div>
@@ -184,7 +184,7 @@ export default {
       elapsedCPU: 0,
       enoughMaxed: 10.0, // quit when 10% of the pixels touched have maxed out
       progress: 0,
-      menuUp: false,
+      menuUp: true,
       prevMaxed: 0,
       prevTouched: 0,
       nFramesSame: 0,
@@ -449,7 +449,7 @@ export default {
     
     switchToRust () {
         this.useRust = true;
-        this.language = "Rust to Web Assembly";
+        this.language = "Rust compiled to WASM (Web Assembly)";
         this.randomize = 2; 
         this.resetAttractor();
     },
