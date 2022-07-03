@@ -936,9 +936,15 @@
     "@babel/helper-validator-identifier" "^7.16.7"
     to-fast-properties "^2.0.0"
 
-"@davidsmaynard/attractor_iterator@link: @davidsmaynard/attractor_iterator":
-  version "0.0.0"
-  uid ""
+"@davidsmaynard/attractor_iterator@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@davidsmaynard/attractor_iterator/-/attractor_iterator-1.0.0.tgz#a4a72661400520ab6e56f6f3542ca68b749f9dee"
+  integrity sha512-DzRPboHUmGDulKJzSzglkAB29Ol9Lkk9BFkxtVfYKOFG7iaGuLW5lDLeYMDeqgaUNVyoyHpyqGG5kMaYDMrrog==
+
+"@davidsmaynard/rust-wasm-attractor@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@davidsmaynard/rust-wasm-attractor/-/rust-wasm-attractor-1.0.0.tgz#b5b094b84b59ac74533638f2a30c589e4cb25087"
+  integrity sha512-t5N4SMuc5fYymH/eLziACmaJQoHwgzPc4QcPeCuzqQXxL1NHoWeASElREgCJPCt3aES15lk/xjZJvXvVx5YDxg==
 
 "@hapi/address@2.x.x":
   version "2.1.4"

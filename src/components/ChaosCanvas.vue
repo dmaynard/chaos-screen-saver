@@ -252,12 +252,12 @@ export default {
     this.animationRequestID = window.requestAnimationFrame(this.doAnimation);
 
     // this.wasmPromise = import("File ../../../rust/rust-wasm-attractor")
-    this.wasmPromise = import("rust-wasm-attractor")
+    this.wasmPromise = import("@davidsmaynard/rust-wasm-attractor")
       .then((wasm) => {
         this.wasm = wasm;
       })
       .catch((err) => alert("Failed to load wasm module" + err));
-    import("rust-wasm-attractor/rust_wasm_attractor_bg.wasm")
+    import("@davidsmaynard/rust-wasm-attractor/rust_wasm_attractor_bg.wasm")
       .then((wasmbg) => {
         this.wasmbg = wasmbg;
       })
