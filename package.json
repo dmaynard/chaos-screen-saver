@@ -10,12 +10,14 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.13.8",
+    "@davidsmaynard/attractor_iterator": "^1.0.0",
+    "@davidsmaynard/rust-wasm-attractor": "^1.0.0",
     "core-js": "^3.6.5",
+    "rust-wasm-attractor": "link: rust-wasm-attractor",
     "serialize-javascript": "^4.0.0",
     "vue": "^2.6.12",
     "vue-simple-progress": "^1.1.1",
-    "vue-speedometer": "^1.8.0",
-    "@davidsmaynard/attractor_iterator": "^0.1.6"
+    "vue-speedometer": "^1.8.0"
   },
   "devDependencies": {
     "@babel/core": "^7.13.8",

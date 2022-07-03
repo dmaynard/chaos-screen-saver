@@ -1,5 +1,8 @@
 <template>
   <div class="chaos-canvas-wrapper">
+    <h3 align="center">
+      Using {{ language }}
+    </h3>
     <canvas
       id="mycanvas"
       ref="chaos-canvas"
@@ -9,6 +12,7 @@
       class="menu-wrapper"
       style="width: 150px "
     >
+
       <div v-if="menuUp">
         <button
           class="close labeltag"
@@ -62,7 +66,7 @@
             :value="meanItersPerMillisonds"
             :width="150"
             :height="100"
-            :max-value="4000"
+            :max-value="20000"
           />
           <label
             id="itersperms"
@@ -76,6 +80,27 @@
           >
             Test
           </button>
+          <div v-if="useRust">
+            <button
+              id="useES6Button"
+              ref="useES6"
+              class="uiButton"
+              @click="switchToES6"
+            >
+              Use ES6
+            </button>
+          </div>
+          <div v-else>
+            <button
+              id="useRustButton"
+              ref="useRust"
+              class="uiButton"
+              @click="switchToRust"
+            >
+              Use Rust=>WASM
+            </button>
+           
+          </div>
           <button
             id="about"
             class="uiButton"
@@ -83,6 +108,8 @@
           >
             About
           </button>
+
+          
         </div>
       </div>
       <div v-else>
@@ -122,19 +149,16 @@
 
 <script>
 /* eslint-disable no-console */
-
-// Todo eliminate extraneous UI and functions
+/* eslint-disable */ 
 import myprogressbar from "vue-simple-progress";
 import VueSpeedometer from "vue-speedometer";
-// import { AttractorObj } from "../modules/Attractor";
-// Add the following line in Package.json to use the npm package
-// "@davidsmaynard/attractor_iterator": "^0.1.4"
 import { AttractorObj } from "@davidsmaynard/attractor_iterator";
-const logPerfArraySize = 6; // 2**6 = 64 perfSamples
+// import { memory } from "rust-wasm-attractor/rust_wasm_attractor_bg"
+const logPerfArraySize = 6;
 export default {
   components: {
     VueSpeedometer,
-    myprogressbar,
+    myprogressbar
   },
   data() {
     return {
@@ -144,14 +168,14 @@ export default {
       imageData: null,
       putImageData: null,
       data: null,
-      randomize: true,
+      randomize: 0, // 0 randomize, 1 test case, 2 same as last
       frames: 0,
       iters: 0,
       paused: false,
       startNewAttractor: true,
       displayDelayDefault: 600,
       displayDelay: 0,
-      initialIterations: 20000,
+      initialIterations: 10000,
 
       pbarcolor: "rgba(0,200,0,0.5)",
       tbarcolor: "rgba(240,180,0,0.5)",
@@ -168,13 +192,19 @@ export default {
         width: 0,
         height: 0,
       },
+      x: 0.1,
+      y: 0.1,
       animationRequestID: null,
       msFrameBudget: 13, // should be less than 16 for 60 fps.
-      clearScreen: true,
       att: null,
       framePerfs: new Array(2 ** logPerfArraySize),
       meanItersPerMillisonds: 0,
       countdownpct: 0,
+      wasmPromise: null,
+      wasm: null,
+      wasmbg: null,
+      useRust: false,
+      language: "ES6 to Javascript",
       aboutUrl:
         "https://github.com/dmaynard/chaos-screen-saver/blob/master/README.md",
     };
@@ -220,7 +250,20 @@ export default {
     this.paused = false;
 
     this.animationRequestID = window.requestAnimationFrame(this.doAnimation);
-    this.att = new AttractorObj(true, this.width, this.height);
+
+    // this.wasmPromise = import("File ../../../rust/rust-wasm-attractor")
+    this.wasmPromise = import("@davidsmaynard/rust-wasm-attractor")
+      .then((wasm) => {
+        this.wasm = wasm;
+      })
+      .catch((err) => alert("Failed to load wasm module" + err));
+    import("@davidsmaynard/rust-wasm-attractor/rust_wasm_attractor_bg.wasm")
+      .then((wasmbg) => {
+        this.wasmbg = wasmbg;
+      })
+      .catch((err) => alert("Failed to load wasmbg module" + err));
+      
+    this.att = this.allocAttractorObj();
     // this.pbarcolor = "rgba(0, 225, 0, 0.3)";
     // this.pbgcolor = "rgba(255, 225, 255, 0.3)";
   },
@@ -258,7 +301,7 @@ export default {
         if (this.animationRequestID) {
           window.cancelAnimationFrame(this.animationRequestID);
         }
-        this.randomize = false;
+        this.randomize = 2;
         this.startNewAttractor = true;
         this.initImageData(window.innerWidth, window.innerHeight);
         this.animationRequestID = window.requestAnimationFrame(
@@ -280,6 +323,7 @@ export default {
         this.att.data[i + 2] ^= b; // blue
       }
     },
+ 
     zeroImage() {
       for (var i = 0; i < this.att.data.length; i += 4) {
         this.att.data[i] = 0; // red
@@ -323,8 +367,8 @@ export default {
         return;
       }
 
-      this.prevMaxed = this.att ? this.att.nMaxed : 0;
-      this.prevTouched = this.att ? this.att.nTouched : 0;
+      this.prevMaxed = this.att ? this.att.getn_maxed() : 0;
+      this.prevTouched = this.att ? this.att.getn_touched() : 0;
       if (this.startNewAttractor) {
         this.startTime = performance.now();
       }
@@ -332,17 +376,15 @@ export default {
       this.iterateAttractor(
         this.startNewAttractor,
         this.randomize,
-        this.clearScreen
       );
       this.startNewAttractor = false;
-      this.clearScreen = true;
-      if (this.att.nTouched > 0 && this.att.nTouched < 500) {
+      if (this.att.getn_touched() > 0 && this.att.getn_touched() < 500) {
         this.startNewAttractor = true;
         this.displayDelay = 0;
       }
       if (
-        this.att.nTouched == this.prevTouched &&
-        this.att.nMaxed == this.prevMaxed
+        this.att.getn_touched() == this.prevTouched &&
+        this.att.getn_maxed() == this.prevMaxed
       ) {
         this.nFramesSame++;
         if (this.nFramesSame > 120) {
@@ -356,13 +398,13 @@ export default {
         this.nFramesSame = 0;
       }
 
-      let percentMaxed = (this.att.nMaxed * 100) / this.att.nTouched;
+      let percentMaxed = (this.att.getn_maxed() * 100) / this.att.getn_touched();
       this.progress = Math.min((percentMaxed * 100) / this.enoughMaxed, 100);
       this.calculateProgress(this.displayDelay);
       if (percentMaxed > this.enoughMaxed) {
         this.startNewAttractor = true;
         this.displayDelay =
-          this.att.nTouched > 5000 ? this.displayDelayDefault : 0;
+          this.att.getn_touched() > 5000 ? this.displayDelayDefault : 0;
         // console.log(
         //   this.nTouched +
         //     " touched " +
@@ -397,8 +439,27 @@ export default {
       // this.animationRequestID = window.requestAnimationFrame(this.doAnimation);
     },
     pauseAnimation() {
+      // window.greet();
       this.paused = true;
     },
+  
+    doToggleRust() {
+
+    },
+    
+    switchToRust () {
+        this.useRust = true;
+        this.language = "Rust to Web Assembly";
+        this.randomize = 2; 
+        this.resetAttractor();
+    },
+     switchToES6 () {
+        this.useRust = false;
+        this.language = "ES6 to Javascript";
+        this.randomize = 2; 
+        this.resetAttractor();
+    },
+
     resetAttractor() {
       if (this.paused) {
         this.paused = false;
@@ -406,11 +467,9 @@ export default {
       }
       this.displayDelay = 0;
       this.startNewAttractor = true;
-      this.randomize = true;
-      this.clearScreen = true;
     },
 
-    iterateAttractor(init, randomize, clearScreen) {
+    iterateAttractor(init, randomize) {
       // let nx = 0;
       // let ny = 0;
       let msElapsed = 1;
@@ -418,24 +477,18 @@ export default {
 
       if (init) {
         this.frames = 0;
-        let savedParams = [...this.att.params];
-        this.att = new AttractorObj(
-          randomize,
+        this.att = this.allocAttractorObj(
           this.width,
-          this.height,
-          savedParams
+          this.height
         );
-        if (clearScreen) {
-          this.ctx.fillStyle = "rgba(255,255,255,1.0)";
-          this.ctx.fillRect(0, 0, this.width, this.height);
-          this.imageData = this.ctx.getImageData(0, 0, this.width, this.height);
-          this.data = this.imageData.data;
-        }
-
-        this.randomize = true;
+    
       }
       let startTime = performance.now();
-      loopCount = this.att.calculateFrame(this.msFrameBudget, init, this.initialIterations);
+      loopCount = this.att.calculate_frame(
+        this.msFrameBudget,
+        init,
+        this.initialIterations
+      );
       msElapsed = performance.now() - startTime;
       this.framePerfs[this.frames & (2 ** logPerfArraySize - 1)] =
         loopCount / msElapsed;
@@ -457,11 +510,6 @@ export default {
       this.imageData.data.set(this.att.data);
       this.ctx.putImageData(this.imageData, 0, 0);
     },
-    drawAttractor() {
-      this.displayDelay = 0;
-      this.clearScreen = false;
-      this.randomize = false;
-    },
     doAbout() {
       window.open(
         this.aboutUrl,
@@ -469,19 +517,9 @@ export default {
       );
     },
     doTestAttractor() {
-      let testParam = [
-        -2.3983540752995394,
-        -1.8137134453341095,
-        0.010788338377923257,
-        1.0113015602664608,
-        0.1,
-        0.1,
-      ];
-      this.att.params = [...testParam];
-      this.randomize = false;
+      this.randomize = 1;
       this.startNewAttractor = true;
-      this.att.iters = 0;
-      this.att.calculateFrame(this.msFrameBudget, true, this.initialIterations);
+      this.att.calculate_frame(this.msFrameBudget, true, this.initialIterations);
       this.initImageData(window.innerWidth, window.innerHeight);
       this.animationRequestID = window.requestAnimationFrame(this.doAnimation);
     },
@@ -491,6 +529,44 @@ export default {
           ? 0
           : ((this.displayDelayDefault - delay) * 100) /
             this.displayDelayDefault;
+    },
+   allocAttractorObj( w, h) {
+      switch (this.randomize) {
+	       case 0:
+          this.a = 3.0 * (Math.random() * 2.0 - 1.0);
+          this.b = 3.0 * (Math.random() * 2.0 - 1.0);
+          this.c = Math.random() * 2.0 - 1.0 + 0.5;
+          this.d = Math.random() * 2.0 - 1.0 + 0.5;
+	        break;
+	      case  1:
+          this.a =  -2.3983540752995394;
+          this.b = -1.8137134453341095;
+          this.c = 0.010788338377923257;
+          this.d = 1.0113015602664608;
+          this.randomize = 0;
+	        break;
+	      case  2:
+	         break;   
+       default:
+       }
+      if (this.useRust) {
+        if (this.att) {
+          this.att.free_pixels();  // free the previous pixel buffer
+        }
+       let ao = this.wasm.AttractorObj.new( this.width, this.height, this.x, 
+                this.y, this.a, this.b, this.c, this.d);
+       const dataPtr = ao.pixels();
+       ao.data = new Uint8Array(this.wasmbg.memory.buffer, dataPtr, this.width * this.height*4);
+       this.imageData.data.set(ao.data);
+       this.ctx.putImageData(this.imageData, 0, 0);
+       this.randomize = 0;
+       return ao;
+
+      } else
+       this.randomize = 0;
+       return new AttractorObj( this.width,this.height, this.x, 
+                this.y, this.a, this.b, this.c, this.d);
+     
     },
   },
 };
@@ -578,5 +654,8 @@ span.menu-wrapper {
 .inline {
   margin-top: 10px;
   vertical-align: middle;
+}
+p {
+  font-size: 14px;
 }
 </style>
