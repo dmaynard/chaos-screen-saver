@@ -20,32 +20,6 @@
         >
           X
         </button>
-        <div v-if="paused">
-          <button
-            ref="resume"
-            class="uiButton"
-            @click="startAnimation"
-          >
-            Resume
-          </button>
-        </div>
-        <div v-else>
-          <button
-            id="pauseButton"
-            ref="pause"
-            class="uiButton"
-            @click="pauseAnimation"
-          >
-            Pause
-          </button>
-        </div>
-        <button
-          ref="next"
-          class="uiButton"
-          @click="resetAttractor(true)"
-        >
-          Next
-        </button>
         <myprogressbar
           size="medium"
           :bar-color="pbarcolor"
@@ -59,7 +33,27 @@
           :bg-color="pbgcolor"
           :val="countdownpct"
         />
-
+        <div v-if="useRust">
+          <button
+            id="useES6Button"
+            ref="useES6"
+            class="uiButton"
+            @click="switchToES6"
+          >
+            Use ES6
+          </button>
+        </div>
+        <div v-else>
+          <button
+            id="useRustButton"
+            ref="useRust"
+            class="uiButton"
+            @click="switchToRust"
+          >
+            Use Rust
+          </button>
+           
+        </div>
         <div>
           <vue-speedometer
             id="Iterations"
@@ -74,33 +68,39 @@
             for="Iterations"
           >Pixels per ms
           </label>
+          <div v-if="paused">
+            <button
+              ref="resume"
+              class="uiButton"
+              @click="startAnimation"
+            >
+              Resume
+            </button>
+          </div>
+          <div v-else>
+            <button
+              id="pauseButton"
+              ref="pause"
+              class="uiButton"
+              @click="pauseAnimation"
+            >
+              Pause
+            </button>
+          </div>
+          <button
+            ref="next"
+            class="uiButton"
+            @click="resetAttractor(true)"
+          >
+            Next
+          </button>
           <button
             class="uiButton"
             @click="doTestAttractor"
           >
             Test
           </button>
-          <div v-if="useRust">
-            <button
-              id="useES6Button"
-              ref="useES6"
-              class="uiButton"
-              @click="switchToES6"
-            >
-              Use ES6
-            </button>
-          </div>
-          <div v-else>
-            <button
-              id="useRustButton"
-              ref="useRust"
-              class="uiButton"
-              @click="switchToRust"
-            >
-              Use Rust=>WASM
-            </button>
-           
-          </div>
+          
           <button
             id="about"
             class="uiButton"
@@ -587,7 +587,7 @@ button.uiButton {
   border: solid 2px gray;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0);
-  font-size: 16px;
+  font-size: 14px;
 }
 
 #itersperms {
@@ -616,8 +616,8 @@ button.uiButton {
 }
 #about {
   display: block;
-  height: 20px;
-  font-size: 12px;
+  height: 30px;
+  font-size: 14px;
 }
 button.close {
   display: block;
