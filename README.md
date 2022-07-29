@@ -58,18 +58,3 @@ For Production use the AttractorObj modules checked into npm
 "@davidsmaynard/attractor_iterator": "^1.0.0",
 "@davidsmaynardrust-wasm-attractor": "^1.0.0",
 ```
-
-```
-  "dependencies": {
-    "@davidsmaynard/attractor_iterator": "link: @davidsmaynard/attractor_iterator",
-    "rust-wasm-attractor": "link: rust-wasm-attractor"
-  },
-```
-```
-diff --git a/src/components/ChaosCanvas.vue b/src/components/ChaosCanvas.vue
-index 100166f..10af94f 100644
---- a/src/components/ChaosCanvas.vue
-+++ b/src/components/ChaosCanvas.vue
--    this.wasmPromise = import("@davidsmaynard/rust-wasm-attractor")
-+    this.wasmPromise = import("rust-wasm-attractor")
-```
