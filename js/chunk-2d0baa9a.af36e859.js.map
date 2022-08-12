@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./node_modules/@davidsmaynard/rust-wasm-attractor/rust_wasm_attractor.js"],"names":[],"mappings":"kHAAA","file":"js/chunk-2d0baa9a.af36e859.js","sourcesContent":["import * as wasm from \"./rust_wasm_attractor_bg.wasm\";\nexport * from \"./rust_wasm_attractor_bg.js\";"],"sourceRoot":""}
